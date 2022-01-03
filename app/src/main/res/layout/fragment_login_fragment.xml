@@ -52,4 +52,12 @@
             android:text="Signup"
             android:layout_below="@id/login_button"
             android:layout_centerHorizontal="true"/>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_animation"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:visibility="invisible"
+            app:lottie_rawRes="@raw/loading_animation_1"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
 </RelativeLayout>

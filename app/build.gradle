@@ -58,7 +58,16 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    //Firebase Authorisation
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
     //CardView
     implementation("androidx.cardview:cardview:1.0.0")
+
+    //Lottie Animation
+    implementation 'com.airbnb.android:lottie:4.2.1'
+
+    //Google play services
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
 
 }
