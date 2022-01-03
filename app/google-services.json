@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1039649770744",
+    "project_id": "timetable-a5cf6",
+    "storage_bucket": "timetable-a5cf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039649770744:android:8a9edfc1ae5c168403ff0d",
+        "android_client_info": {
+          "package_name": "com.app.adreal.timetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039649770744-tcff35fp7j6mceobecs9rpogfbcm7kpl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.adreal.timetable",
+            "certificate_hash": "5c89b8641398c2c4252581c4b0b4642b921489f3"
+          }
+        },
+        {
+          "client_id": "1039649770744-l2eqqnev8fkhc8vjoro25h6pnvo7ukrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJWLPVTWbp-Sf-wHEhazTjWtmPdWwlV-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039649770744-l2eqqnev8fkhc8vjoro25h6pnvo7ukrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
