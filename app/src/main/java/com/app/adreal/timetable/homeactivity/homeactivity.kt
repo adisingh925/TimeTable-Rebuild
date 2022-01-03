@@ -32,7 +32,7 @@ class homeactivity : AppCompatActivity() {
             {
                 R.id.monday ->{
                     Toast.makeText(this, "Monday", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_homefragment_to_monday)
+                    //findNavController().navigate(R.id.action_homefragment_to_monday)
                 }
 
                 R.id.tuesday ->{
