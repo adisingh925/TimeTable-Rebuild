@@ -6,18 +6,29 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.app.adreal.timetable.login.login_fragment"
+        android:name="com.app.adreal.timetable.authorization.login.login_fragment"
         android:label="login_fragment" >
         <action
             android:id="@+id/action_login_fragment_to_register_fragment"
             app:destination="@id/register_fragment" />
+        <action
+            android:id="@+id/action_login_fragment_to_resetpassword_fragment"
+            app:destination="@id/resetpassword_fragment" />
     </fragment>
     <fragment
         android:id="@+id/register_fragment"
-        android:name="com.app.adreal.timetable.register.register_fragment"
+        android:name="com.app.adreal.timetable.authorization.register.register_fragment"
         android:label="register_fragment" >
         <action
             android:id="@+id/action_register_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetpassword_fragment"
+        android:name="com.app.adreal.timetable.authorization.resetpassword.resetpassword_fragment"
+        android:label="resetpassword_fragment" >
+        <action
+            android:id="@+id/action_resetpassword_fragment_to_login_fragment"
             app:destination="@id/login_fragment" />
     </fragment>
 </navigation>
