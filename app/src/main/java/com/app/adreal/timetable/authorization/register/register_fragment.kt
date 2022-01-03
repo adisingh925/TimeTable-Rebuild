@@ -33,16 +33,16 @@ class register_fragment : Fragment() {
 
         binding.registerButton.setOnClickListener()
         {
-            if(!binding.name.text.isNullOrEmpty() and !binding.email.text.isNullOrEmpty() and !binding.password.text.isNullOrEmpty())
-            {
-                Toast.makeText(this.context,"Please enter value for all Fields",Toast.LENGTH_SHORT).show()
-            }
-            else
+            if(binding.name.text.isNotEmpty() and binding.email.text.isNotEmpty() and binding.password.text.isNotEmpty())
             {
                 authViewModel.firebase_register(binding.email.text.toString(),binding.password.text.toString())
                 binding.registerButton.isVisible = false
                 binding.loadingAnimation.isVisible = true
                 binding.loadingAnimation.playAnimation()
+            }
+            else
+            {
+                Toast.makeText(this.context,"Please enter value for all Fields",Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -64,7 +64,7 @@ class login_fragment : Fragment() {
 
         binding.loginButton.setOnClickListener()
         {
-            if(!binding.email.text.isNullOrEmpty() and !binding.password.text.isNullOrEmpty())
+            if(binding.email.text.isNotEmpty() and binding.password.text.isNotEmpty())
             {
                 authViewModel.firebase_signin(binding.email.text.toString(),binding.password.text.toString())
                 binding.google.isVisible = false
@@ -74,7 +74,7 @@ class login_fragment : Fragment() {
                 binding.loadingAnimation.playAnimation()
             }
             else{
-
+                Toast.makeText(this.context,"Please enter value for all Fields", Toast.LENGTH_SHORT).show()
             }
         }
 

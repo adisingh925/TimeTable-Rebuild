@@ -31,13 +31,13 @@ class resetpassword_fragment : Fragment() {
 
         binding.sendemailButton.setOnClickListener()
         {
-            if(binding.email.text.isNullOrEmpty())
+            if(binding.email.text.isNotEmpty())
             {
-                Toast.makeText(this.context,"Please enter an Email",Toast.LENGTH_SHORT).show()
+                authViewModel.firebase_reset_password(binding.email.text.toString())
             }
             else
             {
-                authViewModel.firebase_reset_password(binding.email.text.toString())
+                Toast.makeText(this.context,"Please enter an Email",Toast.LENGTH_SHORT).show()
             }
         }
 
