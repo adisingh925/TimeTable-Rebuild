@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.adreal.timetable.R
@@ -14,9 +17,12 @@ import com.app.adreal.timetable.authorization.viewmodel.authViewModel
 import com.app.adreal.timetable.constants.constants.Companion.clientID
 import com.app.adreal.timetable.constants.constants.Companion.request_code
 import com.app.adreal.timetable.databinding.FragmentLoginFragmentBinding
+import com.app.adreal.timetable.homeactivity.homeactivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class login_fragment : Fragment() {
@@ -25,10 +31,22 @@ class login_fragment : Fragment() {
 
     lateinit var authViewModel: authViewModel
 
+    var user = Firebase.auth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        if(user.currentUser!=null)
+        {
+            //go to home activity
+            val intent = Intent(this.context,homeactivity::class.java)
+            startActivity(intent)
+
+            activity?.finish()
+        }
+
         // Inflate the layout for this fragment
         binding = FragmentLoginFragmentBinding.inflate(layoutInflater)
 
@@ -46,9 +64,51 @@ class login_fragment : Fragment() {
 
         binding.loginButton.setOnClickListener()
         {
-            //authViewModel.firebase_signin(binding.email.text.toString(),binding.password.text.toString())
+            if(!binding.email.text.isNullOrEmpty() and !binding.password.text.isNullOrEmpty())
+            {
+                authViewModel.firebase_signin(binding.email.text.toString(),binding.password.text.toString())
+                binding.google.isVisible = false
+                binding.loginButton.isVisible = false
+                binding.registerButton.isVisible = false
+                binding.loadingAnimation.isVisible = true
+                binding.loadingAnimation.playAnimation()
+            }
+            else{
+
+            }
+        }
+
+        binding.google.setOnClickListener()
+        {
             googlesignin()
         }
+
+        authViewModel.loginstate.observe(viewLifecycleOwner, Observer { value ->
+            if(value == true)
+            {
+                binding.google.isVisible = true
+                binding.loginButton.isVisible = true
+                binding.registerButton.isVisible = true
+                binding.loadingAnimation.isVisible = false
+                binding.loadingAnimation.cancelAnimation()
+                Toast.makeText(this.context,"Login Successful", Toast.LENGTH_SHORT).show()
+
+                //go to home activity
+                val intent = Intent(this.context, homeactivity::class.java)
+                startActivity(intent)
+
+                activity?.finish()
+            }
+            else
+            {
+                binding.google.isVisible = true
+                binding.loginButton.isVisible = true
+                binding.registerButton.isVisible = true
+                binding.loadingAnimation.isVisible = false
+                binding.loadingAnimation.cancelAnimation()
+                Toast.makeText(this.context,"Login Failed", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         return binding.root
     }
@@ -75,6 +135,10 @@ class login_fragment : Fragment() {
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d("google auth", "firebaseAuthWithGoogle:" + account.id)
                 authViewModel.firebaseAuthWithGoogle(account.idToken!!)
+
+                //go to home activity
+                val intent = Intent(this.context,homeactivity::class.java)
+                startActivity(intent)
             }
             catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately

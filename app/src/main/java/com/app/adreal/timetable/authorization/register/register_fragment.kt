@@ -1,5 +1,6 @@
 package com.app.adreal.timetable.authorization.register
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.authorization.viewmodel.authViewModel
 import com.app.adreal.timetable.databinding.FragmentRegisterFragmentBinding
+import com.app.adreal.timetable.homeactivity.homeactivity
 
 
 class register_fragment : Fragment() {
@@ -31,10 +33,17 @@ class register_fragment : Fragment() {
 
         binding.registerButton.setOnClickListener()
         {
-            authViewModel.firebase_register(binding.email.text.toString(),binding.password.text.toString())
-            binding.registerButton.isVisible = false
-            binding.loadingAnimation.isVisible = true
-            binding.loadingAnimation.playAnimation()
+            if(!binding.name.text.isNullOrEmpty() and !binding.email.text.isNullOrEmpty() and !binding.password.text.isNullOrEmpty())
+            {
+                Toast.makeText(this.context,"Please enter value for all Fields",Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                authViewModel.firebase_register(binding.email.text.toString(),binding.password.text.toString())
+                binding.registerButton.isVisible = false
+                binding.loadingAnimation.isVisible = true
+                binding.loadingAnimation.playAnimation()
+            }
         }
 
         authViewModel.registerstate.observe(viewLifecycleOwner, Observer { value ->
@@ -44,6 +53,12 @@ class register_fragment : Fragment() {
                 binding.registerButton.isVisible = true
                 binding.loadingAnimation.cancelAnimation()
                 Toast.makeText(this.context,"Registration Successful",Toast.LENGTH_SHORT).show()
+
+                //go to home activity
+                val intent = Intent(this.context, homeactivity::class.java)
+                startActivity(intent)
+
+                activity?.finish()
             }
             else
             {
