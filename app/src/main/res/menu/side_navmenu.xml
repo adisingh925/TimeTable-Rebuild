@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title = "Day">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+
+                    android:title = "Monday"
+                    android:id = "@+id/monday"
+                    />
+
+                <item
+
+                    android:title = "Tuesday"
+                    android:id = "@+id/tuesday"
+                    />
+
+                <item
+
+                    android:title = "Wednesday"
+                    android:id = "@+id/wednesday"
+                    />
+
+                <item
+
+                    android:title = "Thursday"
+                    android:id = "@+id/thursday"
+                    />
+
+                <item
+
+                    android:title = "Friday"
+                    android:id = "@+id/friday"
+                    />
+
+                <item
+
+                    android:title = "Saturday"
+                    android:id = "@+id/saturday"
+                    />
+            </group>
+
+        </menu>
+    </item>
+
+    <item android:title = "Communication">
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:title = "Home"
+                    android:id = "@+id/user"
+                    android:iconTint="@color/purple_500"
+                    />
+            </group>
+
+        </menu>
+    </item>
+</menu>

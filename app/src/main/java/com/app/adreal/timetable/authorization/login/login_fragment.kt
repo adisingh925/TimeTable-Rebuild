@@ -139,6 +139,8 @@ class login_fragment : Fragment() {
                 //go to home activity
                 val intent = Intent(this.context,homeactivity::class.java)
                 startActivity(intent)
+
+                activity?.finish()
             }
             catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
