@@ -8,31 +8,12 @@
     <fragment
         android:id="@+id/homefragment"
         android:name="com.app.adreal.timetable.daysfragments.home.homefragment"
-        android:label="fragment_homefragment"
-        tools:layout="@layout/fragment_homefragment" >
-        <action
-            android:id="@+id/action_homefragment_to_monday"
-            app:destination="@id/monday" />
-        <action
-            android:id="@+id/action_homefragment_to_tuesday"
-            app:destination="@id/tuesday" />
-        <action
-            android:id="@+id/action_homefragment_to_wednesday"
-            app:destination="@id/wednesday" />
-        <action
-            android:id="@+id/action_homefragment_to_thursday"
-            app:destination="@id/thursday" />
-        <action
-            android:id="@+id/action_homefragment_to_friday"
-            app:destination="@id/friday" />
-        <action
-            android:id="@+id/action_homefragment_to_saturday"
-            app:destination="@id/saturday" />
-    </fragment>
+        android:label="Home"
+        tools:layout="@layout/fragment_homefragment" />
     <fragment
         android:id="@+id/monday"
         android:name="com.app.adreal.timetable.daysfragments.monday"
-        android:label="fragment_monday"
+        android:label="Monday"
         tools:layout="@layout/fragment_monday" >
         <action
             android:id="@+id/action_monday_to_homefragment"
@@ -41,7 +22,7 @@
     <fragment
         android:id="@+id/tuesday"
         android:name="com.app.adreal.timetable.daysfragments.tuesday"
-        android:label="fragment_tuesday"
+        android:label="Tuesday"
         tools:layout="@layout/fragment_tuesday" >
         <action
             android:id="@+id/action_tuesday_to_homefragment"
@@ -50,7 +31,7 @@
     <fragment
         android:id="@+id/wednesday"
         android:name="com.app.adreal.timetable.daysfragments.wednesday"
-        android:label="fragment_wednesday"
+        android:label="Wednesday"
         tools:layout="@layout/fragment_wednesday" >
         <action
             android:id="@+id/action_wednesday_to_homefragment"
@@ -59,7 +40,7 @@
     <fragment
         android:id="@+id/thursday"
         android:name="com.app.adreal.timetable.daysfragments.thursday"
-        android:label="fragment_thursday"
+        android:label="Thursday"
         tools:layout="@layout/fragment_thursday" >
         <action
             android:id="@+id/action_thursday_to_homefragment"
@@ -68,7 +49,7 @@
     <fragment
         android:id="@+id/friday"
         android:name="com.app.adreal.timetable.daysfragments.friday"
-        android:label="fragment_friday"
+        android:label="Friday"
         tools:layout="@layout/fragment_friday" >
         <action
             android:id="@+id/action_friday_to_homefragment"
@@ -77,7 +58,7 @@
     <fragment
         android:id="@+id/saturday"
         android:name="com.app.adreal.timetable.daysfragments.saturday"
-        android:label="fragment_saturday"
+        android:label="Saturday"
         tools:layout="@layout/fragment_saturday" >
         <action
             android:id="@+id/action_saturday_to_homefragment"

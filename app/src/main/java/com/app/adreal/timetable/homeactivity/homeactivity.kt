@@ -2,28 +2,44 @@ package com.app.adreal.timetable.homeactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.ActivityHomeactivityBinding
+import com.app.adreal.timetable.daysfragments.*
+import com.app.adreal.timetable.daysfragments.home.homefragment
 
 class homeactivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHomeactivityBinding
+
+    lateinit var homeViewModel: homeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var actionBarToggle = ActionBarDrawerToggle(this,binding.drawerlayout, 0, 0)
-        binding.drawerlayout.addDrawerListener(actionBarToggle)
+        homeViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.homeactivity.homeViewModel::class.java)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        var actionBarToggle = ActionBarDrawerToggle(this,binding.drawerlayout, 0, 0)
+        binding.drawerlayout.addDrawerListener(actionBarToggle)
+
         actionBarToggle.syncState()
+
+        replaceFragment(homefragment(),"Home")
+        homeViewModel.homestate = "home"
 
         binding.navview.setNavigationItemSelectedListener {
             menuitem ->
@@ -31,39 +47,61 @@ class homeactivity : AppCompatActivity() {
             when(menuitem.itemId)
             {
                 R.id.monday ->{
-                    Toast.makeText(this, "Monday", Toast.LENGTH_SHORT).show()
-                    //findNavController().navigate(R.id.action_homefragment_to_monday)
+                    replaceFragment(monday(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
                 }
 
                 R.id.tuesday ->{
-                    Toast.makeText(this, "Tuesday", Toast.LENGTH_SHORT).show()
+                    replaceFragment(tuesday(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
                 }
 
                 R.id.wednesday ->{
-                    Toast.makeText(this, "Wednesday", Toast.LENGTH_SHORT).show()
+                    replaceFragment(wednesday(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
                 }
 
                 R.id.thursday ->{
-                    Toast.makeText(this, "Thursday", Toast.LENGTH_SHORT).show()
+                    replaceFragment(thursday(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
                 }
 
                 R.id.friday ->{
-                    Toast.makeText(this, "Friday", Toast.LENGTH_SHORT).show()
+                    replaceFragment(friday(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
                 }
 
                 R.id.saturday ->{
-                    Toast.makeText(this, "Saturday", Toast.LENGTH_SHORT).show()
+                    replaceFragment(saturday(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
                 }
 
                 R.id.home ->{
-                    Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                    replaceFragment(homefragment(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "home"
                 }
                 else -> {
                     Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show()
                 }
             }
+            binding.drawerlayout.closeDrawer(binding.navview)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
             true
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment, title : String) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.framelayout, fragment)
+        transaction.commit()
+        setTitle(title)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -81,8 +119,26 @@ class homeactivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (this.binding.drawerlayout.isDrawerOpen(GravityCompat.START)) {
             this.binding.drawerlayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+        }
+        else if(!this.binding.drawerlayout.isDrawerOpen(GravityCompat.START))
+        {
+            if(supportFragmentManager.findFragmentById(R.id.framelayout) != homefragment() && homeViewModel.homestate != "home")
+            {
+                replaceFragment(homefragment(),"Home")
+                binding.navview.setCheckedItem(R.id.home)
+                homeViewModel.homestate = "home"
+            }
+            else
+            {
+                if(homeViewModel.doublebacktoexit)
+                {
+                    finish()
+                    super.onBackPressed()
+                }
+                homeViewModel.doublebacktoexit = true
+                Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
+                Handler(Looper.getMainLooper()).postDelayed(Runnable { homeViewModel.doublebacktoexit = false }, 2000)
+            }
         }
     }
 }

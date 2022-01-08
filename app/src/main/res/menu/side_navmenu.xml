@@ -51,8 +51,7 @@
 
                 <item
                     android:title = "Home"
-                    android:id = "@+id/user"
-                    android:iconTint="@color/purple_500"
+                    android:id = "@+id/home"
                     />
             </group>
 
