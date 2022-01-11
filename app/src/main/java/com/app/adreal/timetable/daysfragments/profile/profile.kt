@@ -32,6 +32,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class profile : Fragment() {
@@ -41,6 +43,8 @@ class profile : Fragment() {
     lateinit var userViewModel: userViewModel
 
     lateinit var profileViewModel: profileViewModel
+
+    private var auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +68,54 @@ class profile : Fragment() {
 
         binding.edit.setOnClickListener()
         {
-            findNavController().navigate(R.id.action_profile_to_editprofile)
+            if(!profileViewModel.fabstate)
+            {
+                if(binding.name.text.isNullOrEmpty())
+                {
+                    Toast.makeText(requireContext(),"Name cannot be blank", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    profileViewModel.fabstate = true
+                    binding.edit.setImageResource(R.drawable.edit)
+
+                    binding.name.isEnabled = false
+                    binding.email.isEnabled = false
+                    binding.phonenumber.isEnabled = false
+                    binding.dob.isEnabled = false
+                    binding.fab.isEnabled = false
+
+                    val name = if(binding.name.text.isNullOrEmpty()) null else binding.name.text.toString()
+                    val email = if(binding.email.text.isNullOrEmpty()) null else binding.email.text.toString()
+                    val phone = if(binding.phonenumber.text.isNullOrEmpty()) null else binding.phonenumber.text.toString()
+                    val dob = if(binding.dob.text.isNullOrEmpty()) null else binding.dob.text.toString()
+
+                    userViewModel.istableexists.observe(viewLifecycleOwner, Observer { data ->
+                        if(data == true)
+                        {
+                            val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+                            userViewModel.update(user)
+                        }
+                        else
+                        {
+                            val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+                            userViewModel.insert(user)
+                        }
+                    })
+                }
+            }
+            else
+            {
+                profileViewModel.fabstate = false
+
+                binding.edit.setImageResource(R.drawable.check)
+
+                binding.name.isEnabled = true
+                binding.email.isEnabled = true
+                binding.phonenumber.isEnabled = true
+                binding.dob.isEnabled = true
+                binding.fab.isEnabled = true
+            }
         }
 
         return binding.root
@@ -75,10 +126,10 @@ class profile : Fragment() {
         userViewModel.readdata.observe(viewLifecycleOwner, Observer { data ->
             if(data!=null)
             {
-                if(data.name.isNullOrEmpty()) binding.name.text = null else binding.name.text = data.name.toString()
-                if(data.email.isNullOrEmpty()) binding.email.text = null else binding.email.text = data.email.toString()
-                if(data.number.isNullOrEmpty()) binding.phonenumber.text = null else binding.phonenumber.text = data.number.toString()
-                if(data.dob.isNullOrEmpty()) binding.dob.text = null else binding.dob.text = data.dob.toString()
+                if(data.name.isNullOrEmpty()) binding.name.text = null else binding.name.setText(data.name.toString())
+                if(data.email.isNullOrEmpty()) binding.email.text = null else binding.email.setText(data.email.toString())
+                if(data.number.isNullOrEmpty()) binding.phonenumber.text = null else binding.phonenumber.setText(data.number.toString())
+                if(data.dob.isNullOrEmpty()) binding.dob.text = null else binding.dob.setText(data.dob.toString())
                 if(data.photo.isNullOrEmpty())
                 {
                     Glide
@@ -98,5 +149,23 @@ class profile : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(requestCode == 100 && resultCode == RESULT_OK)
+        {
+            val imageUri = data?.data
+
+            profileViewModel.imageurl = imageUri
+
+            Glide
+                .with(this)
+                .load(imageUri)
+                .circleCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.imageview)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

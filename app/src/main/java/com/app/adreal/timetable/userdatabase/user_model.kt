@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_info")
 class user_model(
-    @PrimaryKey val id : Int,
+    @PrimaryKey val id : String,
     @ColumnInfo(name = "name") val name : String?,
     @ColumnInfo(name = "email") val email : String?,
     @ColumnInfo(name = "phone_number") val number : String?,

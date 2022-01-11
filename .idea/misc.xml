@@ -8,12 +8,18 @@
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_auth_view_model.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_editprofile.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_friday.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_homefragment.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_login_fragment.xml" value="0.22" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_monday.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_profile.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_profile.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_register_fragment.xml" value="0.22" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_resetpassword_fragment.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_saturday.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_settings.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_thursday.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_tuesday.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_wednesday.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/menu/side_navmenu.xml" value="0.17552083333333332" />
       </map>
     </option>
