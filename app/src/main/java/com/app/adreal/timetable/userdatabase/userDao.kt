@@ -12,12 +12,12 @@ interface userDao {
     @Insert
     fun insert(data : user_model)
 
-    @Query("select * from user_info where id is 1")
-    fun read() : LiveData<user_model?>
+    @Query("select * from user_info where id is :uid")
+    fun read(uid : String) : LiveData<user_model?>
 
     @Update
     fun update(data : user_model)
 
-    @Query("SELECT EXISTS(SELECT * FROM user_info)")
-    fun isRowExist() : LiveData<Boolean>
+    @Query("SELECT EXISTS(SELECT * FROM user_info where id is :uid)")
+    fun isRowExist(uid : String) : LiveData<Boolean>
 }

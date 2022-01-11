@@ -4,15 +4,19 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 class userViewModel(application: Application) : AndroidViewModel(application) {
 
-    val readdata = user_database.getDatabase(application).userdao().read()
+    private var auth = Firebase.auth
 
-    val istableexists = user_database.getDatabase(getApplication()).userdao().isRowExist()
+    val readdata = user_database.getDatabase(application).userdao().read(auth.uid.toString())
+
+    val istableexists = user_database.getDatabase(getApplication()).userdao().isRowExist(auth.uid.toString())
 
     fun insert(data: user_model) {
         viewModelScope.launch(Dispatchers.IO) {

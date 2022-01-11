@@ -1,19 +1,14 @@
 package com.app.adreal.timetable.homeactivity
 
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.app.adreal.timetable.MainActivity
 import com.app.adreal.timetable.R
@@ -196,34 +191,6 @@ class homeactivity : AppCompatActivity() {
                 homeViewModel.doublebacktoexit = true
                 Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
                 Handler(Looper.getMainLooper()).postDelayed(Runnable { homeViewModel.doublebacktoexit = false }, 2000)
-            }
-        }
-    }
-
-    fun sendEmailFeedback(context: Context, appVersionName: String = "") {
-
-        val to = "your@email.com"
-        val subject = "User Feedback for Android $appVersionName"
-        val body = "My feedback: "
-
-        val uriBuilder = StringBuilder("mailto:" + Uri.encode(to))
-        uriBuilder.append("?subject=" + Uri.encode(subject))
-        uriBuilder.append("&body=" + Uri.encode(body))
-        val uriString = uriBuilder.toString()
-
-        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(uriString))
-
-        try {
-            startActivity(intent, null)
-        } catch (e: Exception) {
-            Log.e("LOG_TAG", e.localizedMessage)
-
-            // If there is no email client application, than show error message for the user.
-            if (e is ActivityNotFoundException) {
-                Toast.makeText(
-                    context,
-                    "No application can handle this request. Please install an email client app.",
-                    Toast.LENGTH_LONG).show()
             }
         }
     }
