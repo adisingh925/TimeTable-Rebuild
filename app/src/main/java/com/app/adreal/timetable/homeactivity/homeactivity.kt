@@ -17,6 +17,8 @@ import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.ActivityHomeactivityBinding
 import com.app.adreal.timetable.daysfragments.*
 import com.app.adreal.timetable.daysfragments.home.homefragment
+import com.app.adreal.timetable.daysfragments.profile.profile
+import com.app.adreal.timetable.daysfragments.settings.settings
 
 class homeactivity : AppCompatActivity() {
 
@@ -87,6 +89,31 @@ class homeactivity : AppCompatActivity() {
                     actionBarToggle.syncState()
                     homeViewModel.homestate = "home"
                 }
+
+                R.id.profile ->{
+                    replaceFragment(profile(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
+                }
+
+                R.id.settings ->{
+                    replaceFragment(settings(),menuitem.title.toString())
+                    actionBarToggle.syncState()
+                    homeViewModel.homestate = "none"
+                }
+
+                R.id.share ->{
+
+                }
+
+                R.id.feedback ->{
+
+                }
+
+                R.id.logout ->{
+
+                }
+
                 else -> {
                     Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show()
                 }

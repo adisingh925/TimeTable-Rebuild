@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 
 @Dao
-interface userdao {
+interface dayDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertdata()

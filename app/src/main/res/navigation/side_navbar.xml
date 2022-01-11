@@ -9,7 +9,29 @@
         android:id="@+id/homefragment"
         android:name="com.app.adreal.timetable.daysfragments.home.homefragment"
         android:label="Home"
-        tools:layout="@layout/fragment_homefragment" />
+        tools:layout="@layout/fragment_homefragment" >
+        <action
+            android:id="@+id/action_homefragment_to_monday"
+            app:destination="@id/monday" />
+        <action
+            android:id="@+id/action_homefragment_to_tuesday"
+            app:destination="@id/tuesday" />
+        <action
+            android:id="@+id/action_homefragment_to_wednesday"
+            app:destination="@id/wednesday" />
+        <action
+            android:id="@+id/action_homefragment_to_thursday"
+            app:destination="@id/thursday" />
+        <action
+            android:id="@+id/action_homefragment_to_friday"
+            app:destination="@id/friday" />
+        <action
+            android:id="@+id/action_homefragment_to_saturday"
+            app:destination="@id/saturday" />
+        <action
+            android:id="@+id/action_homefragment_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
     <fragment
         android:id="@+id/monday"
         android:name="com.app.adreal.timetable.daysfragments.monday"
@@ -63,5 +85,23 @@
         <action
             android:id="@+id/action_saturday_to_homefragment"
             app:destination="@id/homefragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.app.adreal.timetable.daysfragments.profile.profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_editprofile"
+            app:destination="@id/editprofile" />
+    </fragment>
+    <fragment
+        android:id="@+id/editprofile"
+        android:name="com.app.adreal.timetable.daysfragments.profile.editprofile"
+        android:label="fragment_editprofile"
+        tools:layout="@layout/fragment_editprofile" >
+        <action
+            android:id="@+id/action_editprofile_to_profile"
+            app:destination="@id/profile" />
     </fragment>
 </navigation>
