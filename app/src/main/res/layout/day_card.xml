@@ -5,21 +5,21 @@
     android:backgroundTint="#003152"
     app:cardCornerRadius="10dp"
     android:layout_margin="5dp"
-    android:layout_height="100dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/subject"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:text="Computer organisation and architecture"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/start_time"
@@ -27,6 +27,7 @@
             android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:text="09:00 AM"
+            android:padding="5dp"
             android:layout_below="@id/subject"
             android:layout_alignStart="@id/subject"
             android:layout_marginTop="10dp"/>
@@ -34,24 +35,74 @@
         <TextView
             android:id="@+id/sign"
             android:layout_width="wrap_content"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:text="-->"
             android:layout_below="@id/subject"
-            android:layout_toEndOf="@id/start_time"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/start_time"
+            android:padding="5dp"
+            android:text="-->"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/end_time"
             android:layout_width="wrap_content"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:text="10:00 AM"
             android:layout_below="@id/subject"
-            android:layout_toEndOf="@id/sign"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/sign"
+            android:padding="5dp"
+            android:text="10:00 AM"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"
+            app:tint = "@color/white"
+            app:fabSize="mini"
+            android:backgroundTint="@color/gray"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+        <RelativeLayout
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_time">
+
+           <TextView
+               android:id="@+id/remind"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/white"
+               android:textSize="17sp"
+               android:layout_marginStart="5dp"
+               android:layout_marginTop="10dp"
+               android:text="Remind me"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/remindswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/remind"
+                android:layout_marginStart="20dp"
+                />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="5"
+                android:valueFrom="5"
+                android:valueTo="30"
+                app:trackColor="@color/white"
+                app:tickColor="@color/black"
+                android:layout_below="@id/remind"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
