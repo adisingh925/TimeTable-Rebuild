@@ -1,10 +1,13 @@
 package com.app.adreal.timetable.homeactivity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -19,6 +22,7 @@ import com.app.adreal.timetable.daysfragments.home.homefragment
 import com.app.adreal.timetable.daysfragments.profile.profile
 import com.app.adreal.timetable.daysfragments.profile.profileViewModel
 import com.app.adreal.timetable.daysfragments.settings.settings
+import com.app.adreal.timetable.viewpageradapter.viewpageradapter
 
 
 class homeactivity : AppCompatActivity() {
@@ -31,6 +35,7 @@ class homeactivity : AppCompatActivity() {
 
     lateinit var authViewModel: authViewModel
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeactivityBinding.inflate(layoutInflater)
@@ -42,73 +47,48 @@ class homeactivity : AppCompatActivity() {
 
         authViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.authorization.viewmodel.authViewModel::class.java)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        var actionBarToggle = ActionBarDrawerToggle(this,binding.drawerlayout, 0, 0)
-        binding.drawerlayout.addDrawerListener(actionBarToggle)
+        setSupportActionBar(binding.toolbar)
 
-        actionBarToggle.syncState()
+        var viewpager = binding.viewpager
 
-        replaceFragment(homefragment(),"Home")
-        homeViewModel.homestate = "home"
+        val adapter = viewpageradapter(supportFragmentManager)
+        adapter.addFragment(monday(), "Monday")
+        adapter.addFragment(tuesday(), "Tuesday")
+        adapter.addFragment(wednesday(), "Wednesday")
+        adapter.addFragment(thursday(), "Thursday")
+        adapter.addFragment(friday(), "Friday")
+        adapter.addFragment(saturday(), "Saturday")
+        viewpager.adapter = adapter
+        binding.tablayout.setupWithViewPager(binding.viewpager)
+
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
+        val actionBarDrawerToggle = ActionBarDrawerToggle(this,binding.drawerlayout,binding.toolbar,0,0)
+        binding.drawerlayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.drawerArrowDrawable.setTint(getColor(R.color.teal))
+        actionBarDrawerToggle.syncState()
 
         binding.navview.setNavigationItemSelectedListener {
             menuitem ->
 
             when(menuitem.itemId)
             {
-                R.id.monday ->{
-                    replaceFragment(monday(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
-                }
-
-                R.id.tuesday ->{
-                    replaceFragment(tuesday(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
-                }
-
-                R.id.wednesday ->{
-                    replaceFragment(wednesday(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
-                }
-
-                R.id.thursday ->{
-                    replaceFragment(thursday(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
-                }
-
-                R.id.friday ->{
-                    replaceFragment(friday(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
-                }
-
-                R.id.saturday ->{
-                    replaceFragment(saturday(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
-                }
-
                 R.id.home ->{
                     replaceFragment(homefragment(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "home"
+                    actionBarDrawerToggle.syncState()
                 }
 
                 R.id.profile ->{
                     replaceFragment(profile(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
+                    actionBarDrawerToggle.syncState()
                 }
 
                 R.id.settings ->{
                     replaceFragment(settings(),menuitem.title.toString())
-                    actionBarToggle.syncState()
-                    homeViewModel.homestate = "none"
+                    actionBarDrawerToggle.syncState()
                 }
 
                 R.id.share ->{
@@ -133,7 +113,7 @@ class homeactivity : AppCompatActivity() {
 
                 R.id.logout ->{
                     authViewModel.logout()
-                    val intent = Intent(this,MainActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
@@ -143,7 +123,7 @@ class homeactivity : AppCompatActivity() {
                 }
             }
             binding.drawerlayout.closeDrawer(binding.navview)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            //supportActionBar?.setDisplayHomeAsUpEnabled(true)
             true
         }
     }
@@ -153,7 +133,6 @@ class homeactivity : AppCompatActivity() {
         transaction.setCustomAnimations(R.anim.slide_in, R.anim.fade_out,R.anim.fade_in, R.anim.slide_out)
         transaction.replace(R.id.framelayout, fragment)
         transaction.commit()
-
         setTitle(title)
     }
 
@@ -175,23 +154,15 @@ class homeactivity : AppCompatActivity() {
         }
         else if(!this.binding.drawerlayout.isDrawerOpen(GravityCompat.START))
         {
-            if(supportFragmentManager.findFragmentById(R.id.framelayout) != homefragment() && homeViewModel.homestate != "home")
+            if(homeViewModel.doublebacktoexit)
             {
-                replaceFragment(homefragment(),"Home")
-                binding.navview.setCheckedItem(R.id.home)
-                homeViewModel.homestate = "home"
+                finish()
+                super.onBackPressed()
             }
-            else
-            {
-                if(homeViewModel.doublebacktoexit)
-                {
-                    finish()
-                    super.onBackPressed()
-                }
-                homeViewModel.doublebacktoexit = true
-                Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
-                Handler(Looper.getMainLooper()).postDelayed(Runnable { homeViewModel.doublebacktoexit = false }, 2000)
-            }
+            homeViewModel.doublebacktoexit = true
+            Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
+            Handler(Looper.getMainLooper()).postDelayed(Runnable { homeViewModel.doublebacktoexit = false }, 2000)
+
         }
     }
 }
