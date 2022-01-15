@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:checkable="true"
         android:title="TimeTable"
         android:id="@+id/timetable"
         android:icon="@drawable/timetable"
@@ -36,7 +37,7 @@
     <item android:title = "Communicate">
 
         <menu>
-            <group android:checkableBehavior="single">
+            <group android:checkableBehavior="none">
 
                 <item
                     android:title = "Share"
@@ -55,6 +56,7 @@
     </item>
 
     <item
+        android:checkable="false"
         android:title="Logout"
         android:id="@+id/logout"
         android:icon="@drawable/login"

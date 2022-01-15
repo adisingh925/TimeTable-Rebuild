@@ -48,8 +48,6 @@ class homeactivity : AppCompatActivity() {
 
         authViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.authorization.viewmodel.authViewModel::class.java)
 
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         setSupportActionBar(binding.toolbar)
 
         val actionbar: ActionBar? = supportActionBar
@@ -57,7 +55,6 @@ class homeactivity : AppCompatActivity() {
 
         val actionBarDrawerToggle = ActionBarDrawerToggle(this,binding.drawerlayout,binding.toolbar,0,0)
         binding.drawerlayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.drawerArrowDrawable.setTint(getColor(R.color.teal))
         actionBarDrawerToggle.syncState()
 
         binding.navview.setNavigationItemSelectedListener {
