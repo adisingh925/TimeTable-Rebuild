@@ -60,9 +60,9 @@
             android:id="@+id/expand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/start_time"
             android:src="@drawable/down"
-            app:fabCustomSize="25dp"
-            android:layout_below="@id/start_time" />
+            app:fabCustomSize="25dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/delete"
@@ -79,6 +79,7 @@
         <RelativeLayout
             android:id="@+id/settings"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_below="@id/expand">
 

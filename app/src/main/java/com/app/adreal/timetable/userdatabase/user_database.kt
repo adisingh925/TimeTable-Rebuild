@@ -4,11 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.app.adreal.timetable.daysdatabase.dao.dayDao
+import com.app.adreal.timetable.daysdatabase.model.monday_model
 
-@Database(entities = [user_model::class], version = 1, exportSchema = false)
+@Database(entities = [user_model::class,monday_model::class], version = 1, exportSchema = false)
 abstract class user_database : RoomDatabase() {
 
     abstract fun userdao() : userDao
+
+    abstract fun daydao() : dayDao
 
     companion object{
 
