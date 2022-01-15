@@ -3,105 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/side_navbar"
-    app:startDestination="@id/homefragment">
-
+    app:startDestination="@id/timetable2">
+    <fragment
+        android:id="@+id/timetable2"
+        android:name="com.app.adreal.timetable.timetable_fragment.timetable"
+        android:label="fragment_timetable"
+        tools:layout="@layout/fragment_timetable" />
     <fragment
         android:id="@+id/homefragment"
         android:name="com.app.adreal.timetable.daysfragments.home.homefragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_homefragment" >
-        <action
-            android:id="@+id/action_homefragment_to_monday"
-            app:destination="@id/monday" />
-        <action
-            android:id="@+id/action_homefragment_to_tuesday"
-            app:destination="@id/tuesday" />
-        <action
-            android:id="@+id/action_homefragment_to_wednesday"
-            app:destination="@id/wednesday" />
-        <action
-            android:id="@+id/action_homefragment_to_thursday"
-            app:destination="@id/thursday" />
-        <action
-            android:id="@+id/action_homefragment_to_friday"
-            app:destination="@id/friday" />
-        <action
-            android:id="@+id/action_homefragment_to_saturday"
-            app:destination="@id/saturday" />
-        <action
-            android:id="@+id/action_homefragment_to_profile"
-            app:destination="@id/profile" />
-    </fragment>
+        android:label="fragment_homefragment"
+        tools:layout="@layout/fragment_homefragment" />
     <fragment
-        android:id="@+id/monday"
-        android:name="com.app.adreal.timetable.daysfragments.monday"
-        android:label="Monday"
-        tools:layout="@layout/fragment_monday" >
-        <action
-            android:id="@+id/action_monday_to_homefragment"
-            app:destination="@id/homefragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/tuesday"
-        android:name="com.app.adreal.timetable.daysfragments.tuesday"
-        android:label="Tuesday"
-        tools:layout="@layout/fragment_tuesday" >
-        <action
-            android:id="@+id/action_tuesday_to_homefragment"
-            app:destination="@id/homefragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/wednesday"
-        android:name="com.app.adreal.timetable.daysfragments.wednesday"
-        android:label="Wednesday"
-        tools:layout="@layout/fragment_wednesday" >
-        <action
-            android:id="@+id/action_wednesday_to_homefragment"
-            app:destination="@id/homefragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/thursday"
-        android:name="com.app.adreal.timetable.daysfragments.thursday"
-        android:label="Thursday"
-        tools:layout="@layout/fragment_thursday" >
-        <action
-            android:id="@+id/action_thursday_to_homefragment"
-            app:destination="@id/homefragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/friday"
-        android:name="com.app.adreal.timetable.daysfragments.friday"
-        android:label="Friday"
-        tools:layout="@layout/fragment_friday" >
-        <action
-            android:id="@+id/action_friday_to_homefragment"
-            app:destination="@id/homefragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/saturday"
-        android:name="com.app.adreal.timetable.daysfragments.saturday"
-        android:label="Saturday"
-        tools:layout="@layout/fragment_saturday" >
-        <action
-            android:id="@+id/action_saturday_to_homefragment"
-            app:destination="@id/homefragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/profile"
+        android:id="@+id/profile2"
         android:name="com.app.adreal.timetable.daysfragments.profile.profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profile_to_editprofile"
-            app:destination="@id/editprofile" />
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/editprofile"
-        android:name="com.app.adreal.timetable.daysfragments.profile.editprofile"
-        android:label="fragment_editprofile"
-        tools:layout="@layout/fragment_editprofile" >
-        <action
-            android:id="@+id/action_editprofile_to_profile"
-            app:destination="@id/profile" />
-    </fragment>
+        android:id="@+id/settings2"
+        android:name="com.app.adreal.timetable.daysfragments.settings.settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

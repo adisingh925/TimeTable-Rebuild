@@ -22,6 +22,7 @@ import com.app.adreal.timetable.daysfragments.home.homefragment
 import com.app.adreal.timetable.daysfragments.profile.profile
 import com.app.adreal.timetable.daysfragments.profile.profileViewModel
 import com.app.adreal.timetable.daysfragments.settings.settings
+import com.app.adreal.timetable.timetable_fragment.timetable
 import com.app.adreal.timetable.viewpageradapter.viewpageradapter
 
 
@@ -51,18 +52,6 @@ class homeactivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        var viewpager = binding.viewpager
-
-        val adapter = viewpageradapter(supportFragmentManager)
-        adapter.addFragment(monday(), "Monday")
-        adapter.addFragment(tuesday(), "Tuesday")
-        adapter.addFragment(wednesday(), "Wednesday")
-        adapter.addFragment(thursday(), "Thursday")
-        adapter.addFragment(friday(), "Friday")
-        adapter.addFragment(saturday(), "Saturday")
-        viewpager.adapter = adapter
-        binding.tablayout.setupWithViewPager(binding.viewpager)
-
         val actionbar: ActionBar? = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
 
@@ -76,6 +65,11 @@ class homeactivity : AppCompatActivity() {
 
             when(menuitem.itemId)
             {
+                R.id.timetable ->{
+                    replaceFragment(timetable(),menuitem.title.toString())
+                    actionBarDrawerToggle.syncState()
+                }
+
                 R.id.home ->{
                     replaceFragment(homefragment(),menuitem.title.toString())
                     actionBarDrawerToggle.syncState()
@@ -131,7 +125,7 @@ class homeactivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment, title : String) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.slide_in, R.anim.fade_out,R.anim.fade_in, R.anim.slide_out)
-        transaction.replace(R.id.framelayout, fragment)
+        transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.commit()
         setTitle(title)
     }
@@ -162,7 +156,6 @@ class homeactivity : AppCompatActivity() {
             homeViewModel.doublebacktoexit = true
             Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
             Handler(Looper.getMainLooper()).postDelayed(Runnable { homeViewModel.doublebacktoexit = false }, 2000)
-
         }
     }
 }
