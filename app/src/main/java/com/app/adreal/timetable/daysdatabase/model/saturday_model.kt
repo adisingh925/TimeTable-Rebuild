@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "monday")
-data class monday_model(
+@Entity(tableName = "saturday")
+data class saturday_model(
     @PrimaryKey(autoGenerate = true) val id : Int,
     @ColumnInfo(name = "username") val username : String,
     @ColumnInfo(name = "start_time") val starttime : String,

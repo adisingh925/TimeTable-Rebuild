@@ -68,13 +68,13 @@
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/delete"
-            app:tint = "@color/white"
-            app:fabSize="mini"
-            android:backgroundTint="@color/gray"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/gray"
+            android:src="@drawable/delete"
+            app:fabSize="mini"
+            app:tint="@color/white" />
 
         <RelativeLayout
             android:id="@+id/settings"

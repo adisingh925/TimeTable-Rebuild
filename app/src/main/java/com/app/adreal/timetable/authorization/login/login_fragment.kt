@@ -38,14 +38,14 @@ class login_fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        if(user.currentUser!=null)
-        {
-            //go to home activity
-            val intent = Intent(this.context,homeactivity::class.java)
-            startActivity(intent)
-
-            activity?.finish()
-        }
+//        if(user.currentUser!=null)
+//        {
+//            //go to home activity
+//            val intent = Intent(this.context,homeactivity::class.java)
+//            startActivity(intent)
+//
+//            activity?.finish()
+//        }
 
         // Inflate the layout for this fragment
         binding = FragmentLoginFragmentBinding.inflate(layoutInflater)

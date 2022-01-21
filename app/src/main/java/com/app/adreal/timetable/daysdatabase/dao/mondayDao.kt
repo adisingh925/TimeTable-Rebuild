@@ -5,7 +5,7 @@ import androidx.room.*
 import com.app.adreal.timetable.daysdatabase.model.monday_model
 
 @Dao
-interface dayDao {
+interface mondayDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertdata(data : monday_model)

@@ -6,13 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".daysfragments.profile.profile">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
-        android:layout_width="match_parent"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        android:layout_height="200dp">
-
         <RelativeLayout
             android:id="@+id/framelayout"
             android:layout_width="match_parent"
@@ -26,25 +19,23 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/profile" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/imageview"
                 android:layout_toRightOf="@id/imageview"
-                android:src="@drawable/edit"
                 android:enabled="false"
+                android:src="@drawable/edit"
                 app:fabSize="mini"
-                app:tint="@color/black" />
+                app:tint="@color/black" />-->
 
         </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
 
 <ScrollView
     android:id="@+id/scrollview"
     android:layout_width="match_parent"
-    android:layout_below="@id/cardview"
+    android:layout_below="@id/framelayout"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true">
 
@@ -55,9 +46,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filledTextField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="50dp"
             android:layout_height="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
             android:hint="Name">
 
@@ -72,10 +64,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filledTextField1"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="50dp"
             android:layout_below="@id/filledTextField"
             android:layout_height="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
             android:hint="Email">
 
@@ -90,10 +83,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filledTextField2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="50dp"
             android:layout_below="@id/filledTextField1"
             android:layout_height="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
             android:hint="Phone Number">
 
@@ -108,11 +102,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filledTextField3"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="50dp"
             android:layout_below="@id/filledTextField2"
             android:layout_height="60dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
             android:hint="Date of Birth">
 
@@ -132,14 +126,13 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        app:fabSize="mini"
-        android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/edit" />
+        android:src="@drawable/edit"
+        app:fabSize="normal" />
 
 </RelativeLayout>

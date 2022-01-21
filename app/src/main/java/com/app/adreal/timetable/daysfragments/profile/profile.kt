@@ -1,37 +1,29 @@
 package com.app.adreal.timetable.daysfragments.profile
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.Context
-import android.os.Binder
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.FragmentProfileBinding
 import com.app.adreal.timetable.userdatabase.userViewModel
 import com.app.adreal.timetable.userdatabase.user_model
-import android.content.Intent
-import android.content.RestrictionEntry.TYPE_NULL
-import android.provider.MediaStore
-import android.text.Editable
-import android.text.method.TextKeyListener
-import android.view.inputmethod.InputMethodManager
-
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -43,6 +35,8 @@ class profile : Fragment() {
     lateinit var userViewModel: userViewModel
 
     lateinit var profileViewModel: profileViewModel
+
+    lateinit var dialog : Dialog
 
     private var auth = Firebase.auth
 
@@ -59,66 +53,94 @@ class profile : Fragment() {
 
         updatedata()
 
-        binding.fab.setOnClickListener()
-        {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, 100)
-        }
+//        binding.fab.setOnClickListener()
+//        {
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            startActivityForResult(intent, 100)
+//        }
 
         binding.edit.setOnClickListener()
         {
-            if(!profileViewModel.fabstate)
+//            if(!profileViewModel.fabstate)
+//            {
+//                if(binding.name.text.isNullOrEmpty())
+//                {
+//                    Toast.makeText(requireContext(),"Name cannot be blank", Toast.LENGTH_SHORT).show()
+//                }
+//                else
+//                {
+//                    val name = if(binding.name.text.isNullOrEmpty()) null else binding.name.text.toString()
+//                    val email = if(binding.email.text.isNullOrEmpty()) null else binding.email.text.toString()
+//                    val phone = if(binding.phonenumber.text.isNullOrEmpty()) null else binding.phonenumber.text.toString()
+//                    val dob = if(binding.dob.text.isNullOrEmpty()) null else binding.dob.text.toString()
+//
+//                    userViewModel.istableexists.observe(viewLifecycleOwner, Observer { data ->
+//                        if(data == true)
+//                        {
+//                            val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+//                            userViewModel.update(user)
+//                        }
+//                        else
+//                        {
+//                            val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+//                            userViewModel.insert(user)
+//                        }
+//                    })
+//                }
+//            }
+//            else
+//            {
+//                profileViewModel.fabstate = false
+//            }
+            dialog = Dialog(this.requireContext())
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(true)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setContentView(R.layout.editprofile_dialog)
+            dialog.findViewById<ImageView>(R.id.profileimage).setOnClickListener()
             {
-                if(binding.name.text.isNullOrEmpty())
-                {
-                    Toast.makeText(requireContext(),"Name cannot be blank", Toast.LENGTH_SHORT).show()
-                }
-                else
-                {
-                    profileViewModel.fabstate = true
-                    binding.edit.setImageResource(R.drawable.edit)
-
-                    binding.name.isEnabled = false
-                    binding.email.isEnabled = false
-                    binding.phonenumber.isEnabled = false
-                    binding.dob.isEnabled = false
-                    binding.fab.isEnabled = false
-
-                    val name = if(binding.name.text.isNullOrEmpty()) null else binding.name.text.toString()
-                    val email = if(binding.email.text.isNullOrEmpty()) null else binding.email.text.toString()
-                    val phone = if(binding.phonenumber.text.isNullOrEmpty()) null else binding.phonenumber.text.toString()
-                    val dob = if(binding.dob.text.isNullOrEmpty()) null else binding.dob.text.toString()
-
-                    userViewModel.istableexists.observe(viewLifecycleOwner, Observer { data ->
-                        if(data == true)
-                        {
-                            val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
-                            userViewModel.update(user)
-                        }
-                        else
-                        {
-                            val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
-                            userViewModel.insert(user)
-                        }
-                    })
-                }
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                startActivityForResult(intent, 100)
             }
-            else
+            dialog.findViewById<FloatingActionButton>(R.id.edit).setOnClickListener()
             {
-                profileViewModel.fabstate = false
-
-                binding.edit.setImageResource(R.drawable.check)
-
-                binding.name.isEnabled = true
-                binding.email.isEnabled = true
-                binding.phonenumber.isEnabled = true
-                binding.dob.isEnabled = true
-                binding.fab.isEnabled = true
+                setdata()
             }
+            setdatatodialog()
+            dialog.show()
         }
 
         return binding.root
+    }
+
+    private fun setdata() {
+        if(dialog.findViewById<EditText>(R.id.name).text.isNullOrEmpty())
+        {
+            Toast.makeText(requireContext(),"Name cannot be blank", Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            val name = if(dialog.findViewById<EditText>(R.id.name).text.isNullOrEmpty()) null else dialog.findViewById<EditText>(R.id.name).text.toString()
+            val email = if(dialog.findViewById<EditText>(R.id.email).text.isNullOrEmpty()) null else dialog.findViewById<EditText>(R.id.email).text.toString()
+            val phone = if(dialog.findViewById<EditText>(R.id.phonenumber).text.isNullOrEmpty()) null else dialog.findViewById<EditText>(R.id.phonenumber).text.toString()
+            val dob = if(dialog.findViewById<EditText>(R.id.dob).text.isNullOrEmpty()) null else dialog.findViewById<EditText>(R.id.dob).text.toString()
+
+            userViewModel.istableexists.observe(viewLifecycleOwner, Observer { data ->
+                if(data == true)
+                {
+                    val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+                    userViewModel.update(user)
+                }
+                else
+                {
+                    val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+                    userViewModel.insert(user)
+                }
+            })
+            dialog.dismiss()
+        }
     }
 
     fun updatedata()
@@ -130,12 +152,13 @@ class profile : Fragment() {
                 if(data.email.isNullOrEmpty()) binding.email.text = null else binding.email.setText(data.email.toString())
                 if(data.number.isNullOrEmpty()) binding.phonenumber.text = null else binding.phonenumber.setText(data.number.toString())
                 if(data.dob.isNullOrEmpty()) binding.dob.text = null else binding.dob.setText(data.dob.toString())
-                if(data.photo.isNullOrEmpty())
+                if(data.photo.isNullOrEmpty() || data.photo == "null")
                 {
                     Glide
                         .with(this)
                         .load(R.drawable.profile)
                         .circleCrop()
+                        .dontTransform()
                         .into(binding.imageview)
                 }
                 else
@@ -147,6 +170,55 @@ class profile : Fragment() {
                         .circleCrop()
                         .into(binding.imageview)
                 }
+            }
+            else
+            {
+                Glide
+                    .with(this)
+                    .load(R.drawable.profile)
+                    .circleCrop()
+                    .dontTransform()
+                    .into(binding.imageview)
+            }
+        })
+    }
+
+    fun setdatatodialog()
+    {
+        userViewModel.readdata.observe(viewLifecycleOwner, Observer { data ->
+            if(data!=null)
+            {
+                if(data.name.isNullOrEmpty()) dialog.findViewById<EditText>(R.id.name).text = null else dialog.findViewById<EditText>(R.id.name).setText(data.name.toString())
+                if(data.email.isNullOrEmpty()) dialog.findViewById<EditText>(R.id.email).text = null else dialog.findViewById<EditText>(R.id.email).setText(data.email.toString())
+                if(data.number.isNullOrEmpty()) dialog.findViewById<EditText>(R.id.phonenumber).text = null else dialog.findViewById<EditText>(R.id.phonenumber).setText(data.number.toString())
+                if(data.dob.isNullOrEmpty()) dialog.findViewById<EditText>(R.id.dob).text = null else dialog.findViewById<EditText>(R.id.dob).setText(data.dob.toString())
+                if(data.photo == "null" || data.photo.isNullOrEmpty())
+                {
+                    Glide
+                        .with(this)
+                        .load(R.drawable.profile)
+                        .circleCrop()
+                        .dontTransform()
+                        .into(dialog.findViewById(R.id.profileimage))
+                }
+                else
+                {
+                    profileViewModel.imageurl = data.photo.toUri()
+                    Glide
+                        .with(this)
+                        .load(data.photo)
+                        .circleCrop()
+                        .into(dialog.findViewById(R.id.profileimage))
+                }
+            }
+            else
+            {
+                Glide
+                    .with(this)
+                    .load(R.drawable.profile)
+                    .circleCrop()
+                    .dontTransform()
+                    .into(dialog.findViewById(R.id.profileimage))
             }
         })
     }
@@ -164,8 +236,20 @@ class profile : Fragment() {
                 .load(imageUri)
                 .circleCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
+                .into(dialog.findViewById(R.id.profileimage))
+
+            Glide
+                .with(this)
+                .load(imageUri)
+                .circleCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.imageview)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun showcustomdialog()
+    {
+
     }
 }

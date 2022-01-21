@@ -1,30 +1,37 @@
 package com.app.adreal.timetable.daysfragments
 
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.FragmentMondayBinding
-import com.app.adreal.timetable.daysadapter.adapter
+import com.app.adreal.timetable.daysadapter.mondayadapter
+import com.app.adreal.timetable.daysdatabase.daysviewmodel.mondayViewModel
 import com.app.adreal.timetable.daysdatabase.model.monday_model
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
 
-
-class monday : Fragment() {
+class monday : Fragment(), mondayadapter.OnItemClickListener {
 
     lateinit var binding: FragmentMondayBinding
 
-    private var auth = Firebase.auth
+    lateinit var mondayViewModel: mondayViewModel
 
-    lateinit var list : ArrayList<monday_model>
+    private var auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,20 +40,19 @@ class monday : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMondayBinding.inflate(layoutInflater)
 
-        list = ArrayList()
-        list.add(monday_model(0,auth.uid.toString(),12,13,"pcom"))
+        mondayViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.daysdatabase.daysviewmodel.mondayViewModel::class.java)
 
-        val adapter = adapter()
+        val adapter = mondayadapter(this)
         val recyclerview = binding.recyclerview
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter.setdata(list)
-
         binding.fab.setOnClickListener()
-        {
-            showcustomdialog()
-        }
+        { showcustomdialog() }
+
+        mondayViewModel.readalldata.observe(viewLifecycleOwner, androidx.lifecycle.Observer { data ->
+            adapter.setdata(data)
+        })
 
         return binding.root
     }
@@ -57,10 +63,46 @@ class monday : Fragment() {
         dialog.setCancelable(true)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.day_dialog)
+        dialog.findViewById<Button>(R.id.cancel).setOnClickListener()
+        {
+            dialog.dismiss()
+        }
+        dialog.findViewById<EditText>(R.id.starttime).setOnClickListener()
+        {
+            timepickerdialog(dialog.findViewById(R.id.starttime))
+        }
+        dialog.findViewById<EditText>(R.id.endtime).setOnClickListener()
+        {
+            timepickerdialog(dialog.findViewById(R.id.endtime))
+        }
+        dialog.findViewById<Button>(R.id.done).setOnClickListener()
+        {
+            if(!dialog.findViewById<EditText>(R.id.starttime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.endtime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.subject).text.isNullOrEmpty())
+            {
+                val data = monday_model(0,auth.uid.toString(),dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
+                mondayViewModel.insert(data)
+                dialog.dismiss()
+            }
+            else
+            {
+                Toast.makeText(this.context,"please enter value for all fields",Toast.LENGTH_SHORT).show()
+            }
+        }
         dialog.show()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private fun timepickerdialog(edittext : EditText)
+    {
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener{ timepicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY,hour)
+            cal.set(Calendar.MINUTE, minute)
+            edittext.setText(SimpleDateFormat("hh:mm:aa").format(cal.time))
+        }
+        TimePickerDialog(this.context,timeSetListener,cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),false).show()
+    }
+
+    override fun onItemClick(data: monday_model) {
+        mondayViewModel.delete(data)
     }
 }

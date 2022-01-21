@@ -37,6 +37,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/starttime"
+            android:focusable="false"
+            android:cursorVisible="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="time" />
@@ -52,7 +54,9 @@
         android:hint="End Time">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
+            android:id="@+id/endtime"
+            android:focusable="false"
+            android:cursorVisible="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="time" />
