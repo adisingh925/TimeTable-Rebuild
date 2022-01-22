@@ -7,7 +7,7 @@
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/drawable/profile.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/activity_homeactivity.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/day_card.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/day_card.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/day_dialog.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/dialog_bg.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/editprofile_dialog.xml" value="0.17552083333333332" />
@@ -28,6 +28,9 @@
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/fragment_wednesday.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/layout/navigation_header.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/menu/side_navmenu.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/xml/preferences.xml" value="0.22" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/xml/root_preferences.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/adisi/AndroidStudioProjects/TimeTable/app/src/main/res/xml/settings.xml" value="0.3333333333333333" />
       </map>
     </option>
   </component>

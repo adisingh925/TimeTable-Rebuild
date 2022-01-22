@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Display">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="Theme"
+            android:entries="@array/mode_list"
+            android:entryValues="@array/mode_list_vales"
+            app:key="nightMode"
+            android:icon="@drawable/theme"
+            app:useSimpleSummaryProvider="true"
+            android:title="Choose Theme"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

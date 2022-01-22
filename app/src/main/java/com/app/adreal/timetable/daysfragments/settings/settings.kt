@@ -1,23 +1,18 @@
 package com.app.adreal.timetable.daysfragments.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.widget.Toast
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.app.adreal.timetable.R
 
 
-class settings : Fragment() {
+class settings : PreferenceFragmentCompat() {
 
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        setPreferencesFromResource(R.xml.preferences, rootKey)
     }
-
-
 }

@@ -1,6 +1,8 @@
 package com.app.adreal.timetable.homeactivity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -10,9 +12,13 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import com.app.adreal.timetable.MainActivity
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.authorization.viewmodel.authViewModel
@@ -26,7 +32,7 @@ import com.app.adreal.timetable.timetable_fragment.timetable
 import com.app.adreal.timetable.viewpageradapter.viewpageradapter
 
 
-class homeactivity : AppCompatActivity() {
+class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener{
 
     lateinit var binding: ActivityHomeactivityBinding
 
@@ -41,6 +47,10 @@ class homeactivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this)
+
+        applySettings()
 
         homeViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.homeactivity.homeViewModel::class.java)
 
@@ -153,6 +163,45 @@ class homeactivity : AppCompatActivity() {
             homeViewModel.doublebacktoexit = true
             Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
             Handler(Looper.getMainLooper()).postDelayed(Runnable { homeViewModel.doublebacktoexit = false }, 2000)
+        }
+    }
+
+    private fun applySettings()
+    {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        when(prefs.getString("nightMode","0"))
+        {
+            "1" ->{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+
+            "2" ->{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+
+            "0" ->{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if(key == "nightMode")
+        {
+            when(sharedPreferences?.getString(key,"0"))
+            {
+                "1" ->{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+
+                "2" ->{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+
+                "0" ->{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+            }
         }
     }
 }
