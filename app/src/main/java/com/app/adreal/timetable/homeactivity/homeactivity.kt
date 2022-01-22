@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
@@ -73,22 +74,22 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             when(menuitem.itemId)
             {
                 R.id.timetable ->{
-                    replaceFragment(timetable(),menuitem.title.toString())
+                    findNavController(R.id.fragmentContainerView).navigate(R.id.timetable)
                     actionBarDrawerToggle.syncState()
                 }
 
                 R.id.home ->{
-                    replaceFragment(homefragment(),menuitem.title.toString())
+                    findNavController(R.id.fragmentContainerView).navigate(R.id.homefragment)
                     actionBarDrawerToggle.syncState()
                 }
 
                 R.id.profile ->{
-                    replaceFragment(profile(),menuitem.title.toString())
+                    findNavController(R.id.fragmentContainerView).navigate(R.id.profile)
                     actionBarDrawerToggle.syncState()
                 }
 
                 R.id.settings ->{
-                    replaceFragment(settings(),menuitem.title.toString())
+                    findNavController(R.id.fragmentContainerView).navigate(R.id.settings)
                     actionBarDrawerToggle.syncState()
                 }
 
@@ -131,7 +132,7 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun replaceFragment(fragment: Fragment, title : String) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.slide_in, R.anim.fade_out,R.anim.fade_in, R.anim.slide_out)
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out,R.anim.fade_in, R.anim.slide_out)
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.commit()
         setTitle(title)
