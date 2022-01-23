@@ -13,6 +13,59 @@
             android:icon="@drawable/theme"
             app:useSimpleSummaryProvider="true"
             android:title="Choose Theme"/>
+
+        <ListPreference
+            android:defaultValue="2"
+            android:dialogTitle="Color"
+            android:entries="@array/color_list"
+            android:entryValues="@array/color_list_vales"
+            app:key="app_theme"
+            android:icon="@drawable/color"
+            app:useSimpleSummaryProvider="true"
+            android:title="Choose Color"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Notifications">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            app:key="allow_notifications"
+            android:icon="@drawable/notifications"
+            android:title="Allow Notifications"/>
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:key="sound"
+            app:dependency="allow_notifications"
+            android:title="Sound"
+            android:icon="@drawable/sound"/>
+
+        <Preference
+            android:name="RingtonePreference"
+            android:summary="Select a ringtone"
+            android:title="Ringtones"
+            app:dependency="allow_notifications"
+            android:icon="@drawable/sound"
+            android:key="ringtone_preference"
+            android:defaultValue="content://settings/system/notification_sound"/>
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="vibrate"
+            app:dependency="allow_notifications"
+            android:icon="@drawable/vibrate"
+            android:title="Vibrate"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Advanced">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            app:key="cloud_sync"
+            android:icon="@drawable/cloud"
+            android:title="Auto Cloud Sync"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

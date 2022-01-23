@@ -1,36 +1,31 @@
 package com.app.adreal.timetable.homeactivity
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.preference.ListPreference
-import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.app.adreal.timetable.MainActivity
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.authorization.viewmodel.authViewModel
 import com.app.adreal.timetable.databinding.ActivityHomeactivityBinding
 import com.app.adreal.timetable.daysfragments.*
-import com.app.adreal.timetable.daysfragments.home.homefragment
-import com.app.adreal.timetable.daysfragments.profile.profile
 import com.app.adreal.timetable.daysfragments.profile.profileViewModel
-import com.app.adreal.timetable.daysfragments.settings.settings
-import com.app.adreal.timetable.timetable_fragment.timetable
-import com.app.adreal.timetable.viewpageradapter.viewpageradapter
 
 
 class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener{
@@ -51,7 +46,7 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this)
 
-        applySettings()
+        applyThemeForApp()
 
         homeViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.homeactivity.homeViewModel::class.java)
 
@@ -167,25 +162,6 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    private fun applySettings()
-    {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        when(prefs.getString("nightMode","0"))
-        {
-            "1" ->{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-
-            "2" ->{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-
-            "0" ->{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            }
-        }
-    }
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if(key == "nightMode")
         {
@@ -202,6 +178,62 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 "0" ->{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }
+            }
+        }
+        if(key == "app_theme")
+        {
+            this.recreate()
+        }
+    }
+
+    private fun applyThemeForApp() {
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        when(prefs.getString("app_theme","2"))
+        {
+            "1" ->{
+
+                binding.toolbar.background.setTint(resources.getColor(R.color.orange))
+
+                val window: Window = this.window
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.statusBarColor = ContextCompat.getColor(
+                    this,
+                    R.color.orange
+                )
+
+                setTheme(R.style.OrangeTheme)
+            }
+
+            "2" ->{
+
+                binding.toolbar.background.setTint(resources.getColor(R.color.teal))
+
+                val window: Window = this.window
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.statusBarColor = ContextCompat.getColor(
+                    this,
+                    R.color.teal
+                )
+
+                setTheme(R.style.TealTheme)
+            }
+
+            "0" ->{
+
+                binding.toolbar.background.setTint(resources.getColor(R.color.green))
+
+                val window: Window = this.window
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.statusBarColor = ContextCompat.getColor(
+                    this,
+                    R.color.green
+                )
+
+                setTheme(R.style.GreenTheme)
             }
         }
     }
