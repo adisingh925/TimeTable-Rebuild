@@ -17,4 +17,7 @@
         android:id="@+id/settingsActivity"
         android:name="com.app.adreal.timetable.daysfragments.settings.SettingsActivity"
         android:label="SettingsActivity" />
+    <action
+        android:id="@+id/setting_to_home"
+        app:destination="@id/homeactivityfragment"/>
 </navigation>

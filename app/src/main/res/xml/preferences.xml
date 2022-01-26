@@ -14,15 +14,15 @@
             app:useSimpleSummaryProvider="true"
             android:title="Choose Theme"/>
 
-        <ListPreference
-            android:defaultValue="2"
-            android:dialogTitle="Color"
-            android:entries="@array/color_list"
-            android:entryValues="@array/color_list_vales"
-            app:key="app_theme"
-            android:icon="@drawable/color"
-            app:useSimpleSummaryProvider="true"
-            android:title="Choose Color"/>
+<!--        <ListPreference-->
+<!--            android:defaultValue="2"-->
+<!--            android:dialogTitle="Color"-->
+<!--            android:entries="@array/color_list"-->
+<!--            android:entryValues="@array/color_list_vales"-->
+<!--            app:key="app_theme"-->
+<!--            android:icon="@drawable/color"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:title="Choose Color"/>-->
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Notifications">

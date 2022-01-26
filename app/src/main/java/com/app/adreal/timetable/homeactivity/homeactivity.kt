@@ -38,6 +38,8 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         binding = ActivityHomeactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        applySettings()
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
@@ -80,10 +82,6 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
 
-        //applyThemeForApp()
-
-        applySettings()
-
         homeViewModel =
             ViewModelProvider(this).get(com.app.adreal.timetable.homeactivity.homeViewModel::class.java)
 
@@ -115,63 +113,7 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 }
             }
         }
-        if(key == "app_theme")
-        {
-            this.recreate()
-        }
     }
-
-//    private fun applyThemeForApp() {
-//
-//        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-//        when(prefs.getString("app_theme","2"))
-//        {
-//            "1" ->{
-//
-//                binding.toolbar.background.setTint(resources.getColor(R.color.orange))
-//
-//                val window: Window = this.window
-//                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//                window.statusBarColor = ContextCompat.getColor(
-//                    this,
-//                    R.color.orange
-//                )
-//
-//                setTheme(R.style.OrangeTheme)
-//            }
-//
-//            "2" ->{
-//
-//                binding.toolbar.background.setTint(resources.getColor(R.color.teal))
-//
-//                val window: Window = this.window
-//                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//                window.statusBarColor = ContextCompat.getColor(
-//                    this,
-//                    R.color.teal
-//                )
-//
-//                setTheme(R.style.TealTheme)
-//            }
-//
-//            "0" ->{
-//
-//                binding.toolbar.background.setTint(resources.getColor(R.color.green))
-//
-//                val window: Window = this.window
-//                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//                window.statusBarColor = ContextCompat.getColor(
-//                    this,
-//                    R.color.green
-//                )
-//
-//                setTheme(R.style.GreenTheme)
-//            }
-//        }
-//    }
 
     private fun applySettings()
     {
