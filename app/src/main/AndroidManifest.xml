@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.adreal.timetable">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -12,10 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/TealTheme">
         <activity
-            android:name=".homeactivity.homeactivity"
-            android:exported="false" />
+            android:name=".daysfragments.settings.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
+        <!-- <activity -->
+        <!-- android:name=".homeactivity.homeactivity" -->
+        <!-- android:exported="false" /> -->
         <activity
-            android:name=".MainActivity"
+            android:name=".homeactivity.homeactivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,13 +17,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.FragmentWednesdayBinding
-import com.app.adreal.timetable.daysadapter.thursdayadapter
 import com.app.adreal.timetable.daysadapter.wednesdayadapter
 import com.app.adreal.timetable.daysdatabase.daysviewmodel.wednesdayViewModel
-import com.app.adreal.timetable.daysdatabase.model.monday_model
 import com.app.adreal.timetable.daysdatabase.model.wednesday_model
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,7 +30,7 @@ class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
 
     lateinit var wednesdayViewModel: wednesdayViewModel
 
-    private var auth = Firebase.auth
+    //private var auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,7 +78,7 @@ class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
         {
             if(!dialog.findViewById<EditText>(R.id.starttime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.endtime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.subject).text.isNullOrEmpty())
             {
-                val data = wednesday_model(0,auth.uid.toString(),dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
+                val data = wednesday_model(0,"aditya",dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
                 wednesdayViewModel.insert(data)
                 dialog.dismiss()
             }

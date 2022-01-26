@@ -5,16 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.adreal.timetable.daysdatabase.model.saturday_model
 import com.app.adreal.timetable.userdatabase.user_database
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class saturdayViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var auth = Firebase.auth
+    //private var auth = Firebase.auth
 
-    val readalldata = user_database.getDatabase(application).saturdaydao().realalldata(auth.uid.toString())
+    val readalldata = user_database.getDatabase(application).saturdaydao().realalldata("aditya")
 
     fun insert(data : saturday_model)
     {

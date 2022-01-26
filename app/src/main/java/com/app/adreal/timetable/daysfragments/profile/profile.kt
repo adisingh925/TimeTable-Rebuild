@@ -24,8 +24,6 @@ import com.app.adreal.timetable.userdatabase.user_model
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 
 class profile : Fragment() {
@@ -38,7 +36,7 @@ class profile : Fragment() {
 
     lateinit var dialog : Dialog
 
-    private var auth = Firebase.auth
+    //private var auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -130,12 +128,12 @@ class profile : Fragment() {
             userViewModel.istableexists.observe(viewLifecycleOwner, Observer { data ->
                 if(data == true)
                 {
-                    val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+                    val user = user_model("aditya",name,email,phone,dob,profileViewModel.imageurl.toString())
                     userViewModel.update(user)
                 }
                 else
                 {
-                    val user = user_model(auth.uid.toString(),name,email,phone,dob,profileViewModel.imageurl.toString())
+                    val user = user_model("aditya",name,email,phone,dob,profileViewModel.imageurl.toString())
                     userViewModel.insert(user)
                 }
             })

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawerlayout"
+        tools:context=".homeactivity.homeactivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomnavbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/bottom_menu"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?actionBarSize"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/bottom_nav" />
+
+        </RelativeLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>

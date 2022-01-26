@@ -20,8 +20,6 @@ import com.app.adreal.timetable.databinding.FragmentTuesdayBinding
 import com.app.adreal.timetable.daysadapter.tuesdayadapter
 import com.app.adreal.timetable.daysdatabase.daysviewmodel.tuesdayViewModel
 import com.app.adreal.timetable.daysdatabase.model.tuesday_model
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,7 +29,7 @@ class tuesday : Fragment(), tuesdayadapter.OnItemClickListener {
 
     lateinit var tuesdayViewModel: tuesdayViewModel
 
-    private var auth = Firebase.auth
+    //private var auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +79,7 @@ class tuesday : Fragment(), tuesdayadapter.OnItemClickListener {
         {
             if(!dialog.findViewById<EditText>(R.id.starttime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.endtime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.subject).text.isNullOrEmpty())
             {
-                val data = tuesday_model(0,auth.uid.toString(),dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
+                val data = tuesday_model(0,"aditya",dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
                 tuesdayViewModel.insert(data)
                 dialog.dismiss()
             }

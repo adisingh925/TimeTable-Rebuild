@@ -14,10 +14,21 @@ import android.net.Uri
 import android.provider.Settings.System.DEFAULT_NOTIFICATION_URI
 import android.provider.Settings.System.DEFAULT_RINGTONE_URI
 import android.R.attr.data
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.preference.*
 
 
 class settings : PreferenceFragmentCompat() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_settings, container, false)
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 

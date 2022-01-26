@@ -2,26 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/side_navbar"
-    app:startDestination="@id/timetable">
+    android:id="@+id/bottom_nav"
+    app:startDestination="@id/homefragment">
     <fragment
         android:id="@+id/timetable"
         android:name="com.app.adreal.timetable.timetable_fragment.timetable"
-        android:label="fragment_timetable"
+        android:label="TimeTable"
         tools:layout="@layout/fragment_timetable" />
     <fragment
         android:id="@+id/homefragment"
         android:name="com.app.adreal.timetable.daysfragments.home.homefragment"
-        android:label="fragment_homefragment"
+        android:label="Home"
         tools:layout="@layout/fragment_homefragment" />
     <fragment
-        android:id="@+id/profile"
-        android:name="com.app.adreal.timetable.daysfragments.profile.profile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/settings"
-        android:name="com.app.adreal.timetable.daysfragments.settings.settings"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/task_fragment"
+        android:name="com.app.adreal.timetable.taskfragment.task_fragment"
+        android:label="Tasks"
+        tools:layout="@layout/fragment_task_fragment" />
 </navigation>
