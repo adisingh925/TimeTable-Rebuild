@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navgraph"
     app:startDestination="@id/homeactivityfragment">
 
@@ -17,7 +16,4 @@
         android:id="@+id/settingsActivity"
         android:name="com.app.adreal.timetable.daysfragments.settings.SettingsActivity"
         android:label="SettingsActivity" />
-    <action
-        android:id="@+id/setting_to_home"
-        app:destination="@id/homeactivityfragment"/>
 </navigation>

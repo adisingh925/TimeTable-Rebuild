@@ -16,8 +16,8 @@ interface thursdayDao {
     @Query("delete from thursday")
     fun deleteall()
 
-    @Query("select * from thursday where username is :uid")
-    fun realalldata(uid : String) : LiveData<List<thursday_model>>
+    @Query("select * from thursday")
+    fun realalldata() : LiveData<List<thursday_model>>
 
     @Update
     fun update(data : thursday_model)

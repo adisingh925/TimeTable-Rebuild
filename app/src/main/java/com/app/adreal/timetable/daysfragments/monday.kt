@@ -77,7 +77,7 @@ class monday : Fragment(), mondayadapter.OnItemClickListener {
         {
             if(!dialog.findViewById<EditText>(R.id.starttime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.endtime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.subject).text.isNullOrEmpty())
             {
-                val data = monday_model(0,"aditya",dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
+                val data = monday_model(0,dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
                 mondayViewModel.insert(data)
                 dialog.dismiss()
             }
@@ -95,7 +95,7 @@ class monday : Fragment(), mondayadapter.OnItemClickListener {
         val timeSetListener = TimePickerDialog.OnTimeSetListener{ timepicker, hour, minute ->
             cal.set(Calendar.HOUR_OF_DAY,hour)
             cal.set(Calendar.MINUTE, minute)
-            edittext.setText(SimpleDateFormat("hh:mm:aa").format(cal.time))
+            edittext.setText(SimpleDateFormat("hh:mm aa").format(cal.time))
         }
         TimePickerDialog(this.context,timeSetListener,cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),false).show()
     }

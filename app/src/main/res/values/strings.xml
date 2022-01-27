@@ -15,16 +15,16 @@
         <item>0</item>
     </string-array>
 
-<!--    <string-array name="color_list">-->
-<!--        <item>Teal</item>-->
-<!--        <item>Orange</item>-->
-<!--        <item>Green</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="color_list">-->
+    <!--        <item>Teal</item>-->
+    <!--        <item>Orange</item>-->
+    <!--        <item>Green</item>-->
+    <!--    </string-array>-->
 
-<!--    <string-array name="color_list_vales">-->
-<!--        <item>2</item>-->
-<!--        <item>1</item>-->
-<!--        <item>0</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="color_list_vales">-->
+    <!--        <item>2</item>-->
+    <!--        <item>1</item>-->
+    <!--        <item>0</item>-->
+    <!--    </string-array>-->
     <string name="title_activity_settings">SettingsActivity</string>
 </resources>

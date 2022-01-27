@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp"
+    android:layout_height="320dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext1"
+            android:layout_margin="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/edittext1"
+            android:hint="Start Time">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/starttime"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext3"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_below="@id/edittext2"
+            android:hint="End Time">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/endtime"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Done"
+            android:layout_margin="10dp"
+            android:layout_below="@id/edittext3"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:text="Cancel"
+            android:layout_margin="10dp"
+            android:layout_below="@id/edittext3"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

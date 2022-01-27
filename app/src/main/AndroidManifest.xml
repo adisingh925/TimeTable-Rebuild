@@ -15,9 +15,6 @@
             android:name=".daysfragments.settings.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
-        <!-- <activity -->
-        <!-- android:name=".homeactivity.homeactivity" -->
-        <!-- android:exported="false" /> -->
         <activity
             android:name=".homeactivity.homeactivity"
             android:exported="true">

@@ -10,9 +10,7 @@ import kotlinx.coroutines.launch
 
 class mondayViewModel(application: Application) : AndroidViewModel(application) {
 
-    //private var auth = Firebase.auth
-
-    val readalldata = user_database.getDatabase(application).mondaydao().realalldata("aditya")
+    val readalldata = user_database.getDatabase(application).mondaydao().realalldata()
 
     fun insert(data : monday_model)
     {

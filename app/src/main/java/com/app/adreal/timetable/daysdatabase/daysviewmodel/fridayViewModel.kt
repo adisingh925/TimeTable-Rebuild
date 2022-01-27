@@ -10,9 +10,7 @@ import kotlinx.coroutines.launch
 
 class fridayViewModel(application: Application) : AndroidViewModel(application) {
 
-    ///private var auth = Firebase.auth
-
-    val readalldata = user_database.getDatabase(application).fridaydao().realalldata("aditya")
+    val readalldata = user_database.getDatabase(application).fridaydao().realalldata()
 
     fun insert(data : friday_model)
     {
