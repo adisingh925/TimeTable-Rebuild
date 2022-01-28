@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/daycard"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="#003152"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="5dp"
+    android:backgroundTint="#3A5509"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="3dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -61,14 +62,6 @@
             android:textColor="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/expand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/start_time"
-            android:src="@drawable/down"
-            app:fabCustomSize="25dp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +78,7 @@
             android:layout_width="match_parent"
             android:visibility="gone"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expand">
+            android:layout_below="@id/start_time">
 
            <TextView
                android:id="@+id/remind"
@@ -115,14 +108,6 @@
                 app:trackColor="@color/white"
                 app:tickColor="@color/black"
                 android:layout_below="@id/remind"/>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/contract"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/up"
-                app:fabCustomSize="25dp"
-                android:layout_below="@id/slider" />
 
         </RelativeLayout>
 

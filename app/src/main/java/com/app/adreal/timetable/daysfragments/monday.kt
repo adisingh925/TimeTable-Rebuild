@@ -40,7 +40,7 @@ class monday : Fragment(), mondayadapter.OnItemClickListener {
 
         mondayViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.daysdatabase.daysviewmodel.mondayViewModel::class.java)
 
-        val adapter = mondayadapter(this)
+        val adapter = this.context?.let { mondayadapter(it,this) }
         val recyclerview = binding.recyclerview
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -49,7 +49,7 @@ class monday : Fragment(), mondayadapter.OnItemClickListener {
         { showcustomdialog() }
 
         mondayViewModel.readalldata.observe(viewLifecycleOwner, androidx.lifecycle.Observer { data ->
-            adapter.setdata(data)
+            adapter?.setdata(data)
         })
 
         return binding.root

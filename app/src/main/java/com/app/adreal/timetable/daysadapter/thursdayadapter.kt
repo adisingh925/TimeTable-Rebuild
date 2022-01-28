@@ -23,8 +23,6 @@ class thursdayadapter(val onItemClickListener: OnItemClickListener) : RecyclerVi
         val subject = binding.subject
         val starttime = binding.startTime
         val endtime = binding.endTime
-        val expand = binding.expand
-        val contract = binding.contract
         val settings = binding.settings
         val delete = binding.delete
     }
@@ -39,16 +37,9 @@ class thursdayadapter(val onItemClickListener: OnItemClickListener) : RecyclerVi
         holder.starttime.text = datalist[position].starttime.toString()
         holder.endtime.text = datalist[position].endtime.toString()
 
-        holder.expand.setOnClickListener()
+        holder.itemView.setOnClickListener()
         {
-            holder.settings.isVisible = true
-            holder.expand.isVisible = false
-        }
-
-        holder.contract.setOnClickListener()
-        {
-            holder.settings.isVisible = false
-            holder.expand.isVisible = true
+            holder.settings.isVisible = !holder.settings.isVisible
         }
 
         holder.delete.setOnClickListener()
