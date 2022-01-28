@@ -1,28 +1,24 @@
 package com.app.adreal.timetable.daysadapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.DayCardBinding
-import com.app.adreal.timetable.daysdatabase.model.monday_model
-import com.bumptech.glide.Glide.init
-import kotlin.coroutines.coroutineContext
+import com.app.adreal.timetable.daysdatabase.model.dayModel
 
-class mondayadapter(private val context: Context,val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<mondayadapter.myviewholder>() {
+class daysAdapter(private val context: Context, val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<daysAdapter.myviewholder>() {
 
     private lateinit var binding: DayCardBinding
 
     interface OnItemClickListener
     {
-        fun onItemClick(data : monday_model)
+        fun onItemClick(data : dayModel)
     }
 
-    private  var datalist = emptyList<monday_model>()
+    private  var datalist = emptyList<dayModel>()
 
     class myviewholder(binding: DayCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -64,7 +60,7 @@ class mondayadapter(private val context: Context,val onItemClickListener: OnItem
         return datalist.size
     }
 
-    fun setdata(data : List<monday_model>)
+    fun setdata(data : List<dayModel>)
     {
         this.datalist = data
         notifyDataSetChanged()

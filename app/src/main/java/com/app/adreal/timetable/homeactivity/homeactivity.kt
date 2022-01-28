@@ -4,33 +4,22 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.Menu
-import android.view.Window
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.ActivityHomeactivityBinding
-import com.app.adreal.timetable.daysfragments.profile.profileViewModel
 
 class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener{
 
     lateinit var binding: ActivityHomeactivityBinding
 
     lateinit var homeViewModel: homeViewModel
-
-    lateinit var profileViewModel: profileViewModel
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,9 +73,6 @@ class homeactivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         homeViewModel =
             ViewModelProvider(this).get(com.app.adreal.timetable.homeactivity.homeViewModel::class.java)
-
-        profileViewModel =
-            ViewModelProvider(this).get(com.app.adreal.timetable.daysfragments.profile.profileViewModel::class.java)
 
     }
 

@@ -17,18 +17,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.adreal.timetable.R
 import com.app.adreal.timetable.databinding.FragmentWednesdayBinding
-import com.app.adreal.timetable.daysadapter.wednesdayadapter
-import com.app.adreal.timetable.daysdatabase.daysviewmodel.wednesdayViewModel
-import com.app.adreal.timetable.daysdatabase.model.wednesday_model
+import com.app.adreal.timetable.daysadapter.daysAdapter
+import com.app.adreal.timetable.daysdatabase.daysviewmodel.daysViewModel
+import com.app.adreal.timetable.daysdatabase.model.dayModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
+class wednesday : Fragment(), daysAdapter.OnItemClickListener {
 
     lateinit var binding: FragmentWednesdayBinding
 
-    lateinit var wednesdayViewModel: wednesdayViewModel
+    lateinit var daysViewModel: daysViewModel
 
     //private var auth = Firebase.auth
 
@@ -39,9 +39,9 @@ class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
         // Inflate the layout for this fragment
         binding = FragmentWednesdayBinding.inflate(layoutInflater)
 
-        wednesdayViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.daysdatabase.daysviewmodel.wednesdayViewModel::class.java)
+        daysViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.daysdatabase.daysviewmodel.daysViewModel::class.java)
 
-        val adapter = wednesdayadapter(this)
+        val adapter = this.context?.let { daysAdapter(it,this) }
         val recyclerview = binding.recyclerview
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -49,8 +49,8 @@ class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
         binding.fab.setOnClickListener()
         { showcustomdialog() }
 
-        wednesdayViewModel.readalldata.observe(viewLifecycleOwner, androidx.lifecycle.Observer { data ->
-            adapter.setdata(data)
+        daysViewModel.readalldata.observe(viewLifecycleOwner, androidx.lifecycle.Observer { data ->
+            adapter?.setdata(data)
         })
 
         return binding.root
@@ -78,8 +78,8 @@ class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
         {
             if(!dialog.findViewById<EditText>(R.id.starttime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.endtime).text.isNullOrEmpty() && !dialog.findViewById<EditText>(R.id.subject).text.isNullOrEmpty())
             {
-                val data = wednesday_model(0,dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
-                wednesdayViewModel.insert(data)
+                val data = dayModel(0,"wednesday",dialog.findViewById<EditText>(R.id.starttime).text.toString(),dialog.findViewById<EditText>(R.id.endtime).text.toString(),dialog.findViewById<EditText>(R.id.subject).text.toString())
+                daysViewModel.insert(data)
                 dialog.dismiss()
             }
             else
@@ -101,7 +101,7 @@ class wednesday : Fragment(), wednesdayadapter.OnItemClickListener {
         TimePickerDialog(this.context,timeSetListener,cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),false).show()
     }
 
-    override fun onItemClick(data: wednesday_model) {
-        wednesdayViewModel.delete(data)
+    override fun onItemClick(data: dayModel) {
+        daysViewModel.delete(data)
     }
 }
