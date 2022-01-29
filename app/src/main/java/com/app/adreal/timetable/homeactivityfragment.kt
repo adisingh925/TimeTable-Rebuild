@@ -23,23 +23,16 @@ class homeactivityfragment : Fragment() {
             when(it.itemId)
             {
                 R.id.home ->{
-                    val poppedFragment = childFragmentManager.popBackStackImmediate(R.id.homefragment,0)
-                    if(!poppedFragment)
-                    {
-                        childFragmentManager.findFragmentById(R.id.fragmentContainerView)
-                            ?.findNavController()
-                            ?.navigate(R.id.homefragment)
-                    }
+                    childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+                        ?.findNavController()
+                        ?.navigate(R.id.homefragment)
                 }
 
                 R.id.timetable ->{
-                    val poppedFragment = childFragmentManager.popBackStackImmediate(R.id.timetable,0)
-                    if(!poppedFragment)
-                    {
-                        childFragmentManager.findFragmentById(R.id.fragmentContainerView)
-                            ?.findNavController()
-                            ?.navigate(R.id.timetable)
-                    }
+                    childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+                        ?.findNavController()
+                        ?.navigate(R.id.timetable)
+
                 }
 
                 R.id.tasks ->{
