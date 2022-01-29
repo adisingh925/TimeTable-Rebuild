@@ -1,14 +1,12 @@
 package com.app.adreal.timetable.daysfragments.settings
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -25,7 +23,14 @@ class SettingsActivity : AppCompatActivity() {
 
         binding = SettingsActivityBinding.inflate(layoutInflater)
 
-        setSupportActionBar(binding.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+
+        toolbar.setNavigationOnClickListener()
+        {
+            finish()
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -33,11 +38,6 @@ class SettingsActivity : AppCompatActivity() {
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        finish()
-        return super.onOptionsItemSelected(item)
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {

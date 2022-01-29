@@ -1,17 +1,12 @@
 package com.app.adreal.timetable
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.app.adreal.timetable.databinding.FragmentHomeactivityfragmentBinding
-
 
 class homeactivityfragment : Fragment() {
 
@@ -28,15 +23,23 @@ class homeactivityfragment : Fragment() {
             when(it.itemId)
             {
                 R.id.home ->{
-                    childFragmentManager.findFragmentById(R.id.fragmentContainerView)
-                        ?.findNavController()
-                        ?.navigate(R.id.homefragment)
+                    val poppedFragment = childFragmentManager.popBackStackImmediate(R.id.homefragment,0)
+                    if(!poppedFragment)
+                    {
+                        childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+                            ?.findNavController()
+                            ?.navigate(R.id.homefragment)
+                    }
                 }
 
                 R.id.timetable ->{
-                    childFragmentManager.findFragmentById(R.id.fragmentContainerView)
-                        ?.findNavController()
-                        ?.navigate(R.id.timetable)
+                    val poppedFragment = childFragmentManager.popBackStackImmediate(R.id.timetable,0)
+                    if(!poppedFragment)
+                    {
+                        childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+                            ?.findNavController()
+                            ?.navigate(R.id.timetable)
+                    }
                 }
 
                 R.id.tasks ->{

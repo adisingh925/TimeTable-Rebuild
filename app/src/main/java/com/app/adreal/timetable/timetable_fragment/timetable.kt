@@ -36,4 +36,5 @@ class timetable : Fragment() {
 
         return binding.root
     }
+
 }
