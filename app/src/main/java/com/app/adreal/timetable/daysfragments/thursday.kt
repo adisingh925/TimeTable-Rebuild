@@ -22,6 +22,7 @@ import com.app.adreal.timetable.daysdatabase.daysviewmodel.daysViewModel
 import com.app.adreal.timetable.daysdatabase.model.dayModel
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class thursday : Fragment(), daysAdapter.OnItemClickListener {
@@ -29,6 +30,8 @@ class thursday : Fragment(), daysAdapter.OnItemClickListener {
     lateinit var binding: FragmentThursdayBinding
 
     lateinit var daysViewModel: daysViewModel
+
+    private lateinit var tempList : ArrayList<dayModel>
 
     //private var auth = Firebase.auth
 
@@ -41,6 +44,8 @@ class thursday : Fragment(), daysAdapter.OnItemClickListener {
 
         daysViewModel = ViewModelProvider(this).get(com.app.adreal.timetable.daysdatabase.daysviewmodel.daysViewModel::class.java)
 
+        tempList = ArrayList()
+
         val adapter = this.context?.let { daysAdapter(it,this) }
         val recyclerview = binding.recyclerview
         recyclerview.adapter = adapter
@@ -50,7 +55,15 @@ class thursday : Fragment(), daysAdapter.OnItemClickListener {
         { showcustomdialog() }
 
         daysViewModel.readalldata.observe(viewLifecycleOwner, androidx.lifecycle.Observer { data ->
-            adapter?.setdata(data)
+            tempList.clear()
+            for(i in data)
+            {
+                if(i.day == "thursday")
+                {
+                    tempList.add(i)
+                }
+            }
+            adapter?.setdata(tempList)
         })
 
         return binding.root

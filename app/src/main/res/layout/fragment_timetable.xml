@@ -9,8 +9,12 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/page_background"
+        android:background="@color/teal"
+        app:tabIndicatorHeight="3dp"
+        app:tabIndicatorGravity="bottom"
+        app:tabTextColor="@color/white"
         android:id="@+id/tablayout"
+        app:tabIndicatorColor="@color/fuchsia"
         android:layout_alignParentTop="true"
         app:tabMode="scrollable">
 
