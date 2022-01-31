@@ -6,8 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.app.adreal.timetable.daysdatabase.dao.dayDao
 import com.app.adreal.timetable.daysdatabase.model.dayModel
+import com.app.adreal.timetable.daysdatabase.model.taskModel
 
-@Database(entities = [dayModel::class,], version = 1, exportSchema = false)
+@Database(entities = [dayModel::class,taskModel::class], version = 1, exportSchema = false)
 abstract class user_database : RoomDatabase() {
 
     abstract fun dayDao() : dayDao

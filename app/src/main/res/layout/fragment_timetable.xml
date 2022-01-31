@@ -14,7 +14,7 @@
         app:tabIndicatorGravity="bottom"
         app:tabTextColor="@color/white"
         android:id="@+id/tablayout"
-        app:tabIndicatorColor="@color/fuchsia"
+        app:tabIndicatorColor="@color/white"
         android:layout_alignParentTop="true"
         app:tabMode="scrollable">
 
